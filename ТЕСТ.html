@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Марвел Кафе — Рогачёв</title>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0c0e;--panel:#17171b;--line:#2b2b32;--red:#e3121b;--yel:#ffb81c;--txt:#f4f2ee;--mut:#a9a7a2;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c0c0e}}
+:root[data-theme="dark"]{--bg:#0c0c0e}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--txt);font:400 16px/1.55 Rubik,system-ui,sans-serif}
+h1,h2,h3{font-family:"Russo One",Impact,sans-serif;font-weight:400;line-height:1.05;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(12,12,14,.94);backdrop-filter:blur(8px);border-bottom:3px solid var(--red)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(12,12,14,.94);z-index:30}
+.bar{display:flex;align-items:center;gap:14px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:"Russo One";font-size:18px}
+.mk{display:grid;place-items:center;width:40px;height:40px;background:var(--red);font:22px "Russo One";letter-spacing:-1px}
+nav{margin-left:auto;display:flex;gap:18px}
+nav a{text-decoration:none;color:var(--mut);font-weight:500}
+nav a:hover{color:var(--txt)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;background:var(--red);color:#fff;font:700 15px Rubik;padding:12px 20px;text-decoration:none;box-shadow:4px 4px 0 var(--yel);transition:transform .1s,box-shadow .1s}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--yel)}
+.btn.ghost{background:transparent;border:2px solid var(--txt);box-shadow:none}
+.cartbtn{margin-left:8px}
+.hero{padding:64px 0 56px;background:radial-gradient(circle at 1.5px 1.5px,rgba(227,18,27,.35) 1.4px,transparent 1.6px) 0 0/14px 14px;border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
+.hero h1{font-size:clamp(40px,8vw,84px);text-transform:uppercase;text-shadow:5px 5px 0 var(--red)}
+.hero p{max-width:46ch;color:#d8d5cf;font-size:18px}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+.info{background:var(--panel);border:3px solid var(--txt);padding:20px;transform:rotate(1.5deg);box-shadow:8px 8px 0 var(--red)}
+.info b{font-family:"Russo One";font-weight:400;font-size:26px;display:block}
+.info div+div{margin-top:12px}.info small{color:var(--mut);display:block}
+section{padding:60px 0}
+h2{font-size:clamp(30px,5vw,48px);margin-bottom:24px;text-transform:uppercase}
+h2::after{content:"";display:block;width:80px;height:6px;background:var(--red);margin-top:10px}
+.news{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.post{background:var(--panel);border:2px solid var(--line);border-left:6px solid var(--red);padding:20px}
+.post.promo{background:var(--yel);color:#111;border-color:#111}
+.tag{display:inline-block;background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:2px 9px;margin-bottom:10px}
+.promo .tag{background:#111}
+.post h3{font-size:22px;margin-bottom:8px}.post p{margin:0 0 10px;color:inherit;opacity:.9}
+.code{font-family:"Russo One";border:2px dashed currentColor;padding:2px 8px;display:inline-block}
+.tabs{display:flex;gap:8px;margin-bottom:20px}
+.tabs button{background:var(--panel);color:var(--txt);border:2px solid var(--line);padding:8px 16px;font:500 15px Rubik;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--red);border-color:var(--red)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.card{background:var(--panel);border:2px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:6px}
+
+/* Блок пиццы (градиент как заглушка, либо картинка) */
+.pz{width:130px;height:130px;margin:0 auto 6px;border-radius:50%;border:7px solid #d79a4a;background:radial-gradient(circle at 30% 35%,var(--a) 0 9px,transparent 10px),radial-gradient(circle at 65% 30%,var(--a) 0 9px,transparent 10px),radial-gradient(circle at 50% 62%,var(--a) 0 10px,transparent 11px),radial-gradient(circle at 25% 70%,var(--b) 0 8px,transparent 9px),radial-gradient(circle at 75% 68%,var(--b) 0 8px,transparent 9px),radial-gradient(circle,#f2c14e 0 60%,#e38b2c 100%)}
+
+.card h3{font-size:20px}.card small{color:var(--mut)}
+.row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px}
+.price{font-family:"Russo One";font-size:22px;color:var(--yel)}
+.add{padding:9px 14px;font-size:14px}
+.note{color:var(--mut);font-size:14px;margin-top:16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+form{display:grid;gap:12px}
+label{display:grid;gap:4px;font-weight:500;font-size:14px}
+input,select,textarea{font:400 16px Rubik;background:#0c0c0e;color:var(--txt);border:2px solid var(--line);padding:11px 12px;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--yel);outline:0}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.err{color:#ff7a7a;font-size:14px;min-height:1em;margin:0}
+footer{border-top:3px solid var(--red);padding:32px 0 40px;color:var(--mut)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between}
+dialog{border:3px solid var(--txt);background:var(--panel);color:var(--txt);padding:0;width:min(520px,94vw);max-height:90vh;box-shadow:8px 8px 0 var(--red)}
+dialog::backdrop{background:rgba(0,0,0,.75)}
+.dlg{padding:22px;overflow:auto;max-height:88vh}
+.dlg h2{font-size:28px}
+.line{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:30px;height:30px;background:var(--line);color:var(--txt);border:0;cursor:pointer;font-size:18px}
+.tot{display:flex;justify-content:space-between;font:22px "Russo One";margin:14px 0}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg label{display:flex;align-items:center;gap:6px;border:2px solid var(--line);padding:8px 12px;cursor:pointer}
+.seg input{width:auto}
+.seg label:has(input:checked){border-color:var(--red);background:rgba(227,18,27,.18)}
+pre{white-space:pre-wrap;background:#0c0c0e;border:2px solid var(--line);padding:12px;font:14px/1.5 Rubik}
+.close{float:right;background:none;border:0;color:var(--txt);font-size:28px;cursor:pointer}
+.badge{background:var(--yel);color:#111;border-radius:20px;padding:0 8px;font-size:13px}
+@media(max-width:760px){nav{display:none}.cartbtn{margin-left:auto}.hero .wrap,.two{grid-template-columns:1fr}.info{transform:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+ <a class="logo" href="#top"><span class="mk">MK</span>Марвел Кафе</a>
+ <nav aria-label="Разделы"><a href="#news">Новости</a><a href="#menu">Меню</a><a href="#order">Заказ</a><a href="#book">Бронь</a><a href="#contacts">Контакты</a></nav>
+ <a class="btn ghost" id="callTop" href="tel:+375447151157">+375 44 715-11-57</a>
+ <button class="btn cartbtn" id="openCart" aria-label="Открыть корзину">Корзина <span class="badge" id="cnt">0</span></button>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+ <div>
+  <h1>Пицца, шаурма, бургеры</h1>
+  <p>Кафе «Марвел» в Рогачёве. Пиццы с именами героев, праздники и дни рождения, доставка и предзаказ.</p>
+  <div class="cta"><a class="btn" href="#menu">Выбрать пиццу</a><a class="btn ghost" href="#book">Забронировать стол</a></div>
+ </div>
+ <div class="info">
+  <div><b>12:00–23:00</b><small>Кухня до 22:00–22:30</small></div>
+  <div><b>+375 44 715-11-57</b><small>Доставка, предзаказ, бронь мест</small></div>
+ </div>
+</div></div>
+
+<section id="news"><div class="wrap">
+ <h2>Новости и акции</h2>
+ <div class="news" id="newsList"></div>
+</div></section>
+
+<section id="menu" style="background:#101013"><div class="wrap">
+ <h2>Меню</h2>
+ <div class="tabs" role="group" aria-label="Фильтр"><button aria-pressed="true" data-f="all">Все пиццы</button><button aria-pressed="false" data-f="new">Новинки</button></div>
+ <div class="grid" id="menuGrid"></div>
+ <p class="note">Все пиццы 32 см. Шаурму, бургеры и другие блюда уточняйте по телефону. Цены в белорусских рублях.</p>
+</div></section>
+
+<section id="order"><div class="wrap two">
+ <div>
+  <h2>Предзаказ и доставка</h2>
+  <p>Соберите заказ в меню, откройте корзину и укажите способ получения. Заказ сразу поступит в работу.</p>
+  <p>Акция «Осень»: при заказе пиццы картошка фри в подарок. Введите кодовое слово в корзине.</p>
+  <button class="btn" id="openCart2">Открыть корзину</button>
+ </div>
+ <div id="book">
+  <h2>Бронь стола</h2>
+  <form id="bookForm" novalidate>
+   <label>Имя<input name="n" autocomplete="name" required></label>
+   <label>Телефон<input name="p" type="tel" autocomplete="tel" placeholder="+375 44 …" required></label>
+   <div class="f2"><label>Дата<input name="d" type="date" required></label><label>Время<input name="t" type="time" min="12:00" max="22:00" required></label></div>
+   <label>Гостей<input name="g" type="number" min="1" max="40" value="2"></label>
+   <label>Повод<select name="o"><option>Просто посидеть</option><option>День рождения</option><option>Праздник</option></select></label>
+   <p class="err" id="bookErr" role="alert"></p>
+   <button class="btn" type="submit">Забронировать</button>
+  </form>
+ </div>
+</div></section>
+</main>
+
+<footer id="contacts"><div class="wrap">
+ <div><b style="color:var(--txt)">Кафе «Марвел»</b><br>г. Рогачёв<br>Ежедневно 12:00–23:00<br>Кухня до 22:00–22:30</div>
+ <div><a href="tel:+375447151157">+375 44 715-11-57</a><br><a href="https://www.instagram.com/cafe_marvel_rogachev" target="_blank" rel="noopener">Instagram @cafe_marvel_rogachev</a><br><a href="https://foodpicasso.com/x/1100" target="_blank" rel="noopener">Онлайн-заказ на Foodpicasso</a></div>
+</div></footer>
+
+<dialog id="cartDlg"><div class="dlg">
+ <button class="close" data-close aria-label="Закрыть">×</button>
+ <h2>Ваш заказ</h2>
+ <div id="cartBody"></div>
+</div></dialog>
+
+<!-- Дополнительное модальное окно (если понадобится) -->
+<dialog id="doneDlg"><div class="dlg">
+ <button class="close" data-close aria-label="Закрыть">×</button>
+ <h2 id="doneTitle">Готово</h2>
+ <p id="doneText"></p>
+</div></dialog>
+
+<script>
+// ===== НАСТРОЙКИ =====
+var PHONE = "+375 44 715-11-57";
+var DELIVERY_NOTE = "Стоимость доставки уточняет оператор";
+var PROMO_CODE = "ОСЕНЬ";
+
+var BOT_TOKEN = '8611623344:AAHmaQLWXAyXjuB7UAfA-pC9YVj1rx8FklU';
+var CHAT_ID = '-1004460005934';
+
+var NEWS = [
+ {tag:"Акция",promo:1,t:"Осенняя акция",p:"При заказе пиццы картошка фри в подарок. Понедельник–четверг, с 12:00 до 17:00.",code:"Кодовое слово: ОСЕНЬ"},
+ {tag:"Новинки",t:"Пиццы по мотивам Marvel",p:"Дэдпул, Валькирия, Звёздная сила, Мультивселенная и другие. Все 32 см."},
+ {tag:"Праздники",t:"Дни рождения и праздники",p:"Проведите праздник в кафе. Бронь мест по телефону или через форму на сайте."},
+ {tag:"Доставка",t:"Доставка и предзаказ",p:"Закажите на сайте или по телефону. Кухня работает до 22:00–22:30."}
+];
+
+var MENU = [
+ ["Барбекю-Лайт", 21, "560", 1, "#b5382b", "#6b2a1a"],
+ ["Вижн", 19, "560", 1, "#c9341f", "#e3a53a"],
+ ["Карри", 21, "560", 1, "#e8b13a", "#7a4a1c"],
+ ["Звёздная сила", 21, "560", 1, "#c0261d", "#3f7f3a"],
+ ["Чеддер", 20, "560", 1, "#d6531f", "#f6d57a"],
+ ["Валькирия", 19, "575", 1, "#d2362a", "#e9c24a"],
+ ["Щ.И.Т", 21, "560", 1, "#a82a22", "#4a7a3a"],
+ ["Дэдпул", 22, "560", 1, "#9c1b1b", "#2b2b2b"],
+ ["Мультивселенная", 20, "560", 1, "#c9341f", "#6aa34a"]
+];
+
+var $ = function(s) { return document.querySelector(s); };
+var cart = {};
+
+try {
+  var sv = localStorage.getItem("mk_cart");
+  if (sv) cart = JSON.parse(sv) || {};
+} catch(e) {}
+
+function save() {
+  try { localStorage.setItem("mk_cart", JSON.stringify(cart)); } catch(e) {}
+}
+
+var byn = function(n) { return n.toFixed(2).replace(".", ",") + " руб"; };
+
+$("#newsList").innerHTML = NEWS.map(function(n) {
+  return '<article class="post'+(n.promo?' promo':'')+'"><span class="tag">'+n.tag+'</span><h3>'+n.t+'</h3><p>'+n.p+'</p>'+(n.code?'<span class="code">'+n.code+'</span>':'')+'</article>';
+}).join("");
+
+function drawMenu(f) {
+  $("#menuGrid").innerHTML = MENU.map(function(m, i) {
+    if (f === "new" && !m[3]) return "";
+    return '<div class="card"><div class="pz" style="--a:'+m[4]+';--b:'+m[5]+'"></div><h3>'+m[0]+'</h3><small>32 см · '+m[2]+' г</small><div class="row"><span class="price">'+byn(m[1])+'</span><button class="btn add" data-i="'+i+'">В корзину</button></div></div>';
+  }).join("");
+}
+drawMenu("all");
+
+document.querySelectorAll(".tabs button").forEach(function(b) {
+  b.onclick = function() {
+    document.querySelectorAll(".tabs button").forEach(function(x) { x.setAttribute("aria-pressed", "false"); });
+    b.setAttribute("aria-pressed", "true");
+    drawMenu(b.dataset.f);
+  };
+});
+
+$("#menuGrid").onclick = function(e) {
+  var b = e.target.closest(".add");
+  if (!b) return;
+  var i = b.dataset.i;
+  cart[i] = (cart[i] || 0) + 1;
+  save();
+  count();
+  b.textContent = "Добавлено";
+  setTimeout(function() { b.textContent = "В корзину"; }, 800);
+};
+
+function count() {
+  var c = 0;
+  for (var k in cart) c += cart[k];
+  $("#cnt").textContent = c;
+}
+
+function sum() {
+  var s = 0;
+  for (var k in cart) s += MENU[k][1] * cart[k];
+  return s;
+}
+count();
+
+var mode = "delivery";
+
+function renderCart() {
+  var keys = Object.keys(cart).filter(function(k) { return cart[k] > 0; });
+  var b = $("#cartBody");
+  
+  if (!keys.length) {
+    b.innerHTML = '<p>Корзина пуста. Выберите пиццу в меню.</p><a class="btn" href="#menu" data-close>Перейти в меню</a>';
+    return;
+  }
+  
+  var h = keys.map(function(k) {
+    return '<div class="line"><span>'+MENU[k][0]+'<br><small style="color:var(--mut)">'+byn(MENU[k][1])+'</small></span><span class="qty"><button data-m="'+k+'" aria-label="Меньше">−</button><b>'+cart[k]+'</b><button data-p="'+k+'" aria-label="Больше">+</button></span></div>';
+  }).join("");
+  
+  h += '<div class="tot"><span>Итого</span><span id="tot">'+byn(sum())+'</span></div>';
+  h += '<form id="ordForm" novalidate><div class="seg" role="radiogroup" aria-label="Способ получения">'
+    + ['delivery:Доставка', 'pickup:Самовывоз', 'hall:В зале'].map(function(x) {
+        var a = x.split(":");
+        return '<label><input type="radio" name="mode" value="'+a[0]+'"'+(mode === a[0] ? ' checked' : '')+'>'+a[1]+'</label>';
+      }).join("") + '</div>'
+    + '<label>Имя<input name="n" autocomplete="name" required></label>'
+    + '<label>Телефон<input name="p" type="tel" autocomplete="tel" placeholder="+375 44 …" required></label>'
+    + '<label id="addrL">Адрес доставки<input name="a" autocomplete="street-address" placeholder="Улица, дом, квартира"></label>'
+    + '<p class="note" id="dNote" style="margin:0">'+DELIVERY_NOTE+'</p>'
+    + '<label>Когда<input name="t" type="time" min="12:00" max="22:00"><small style="color:var(--mut)">Пусто — как можно скорее</small></label>'
+    + '<label>Кодовое слово<input name="c" placeholder="Например, акция «Осень»"></label>'
+    + '<label>Комментарий<textarea name="m" rows="2"></textarea></label>'
+    + '<p class="err" id="ordErr" role="alert"></p><button class="btn" type="submit">Оформить предзаказ</button></form>';
+    
+  b.innerHTML = h;
+  toggleAddr();
+}
+
+function toggleAddr() {
+  var d = (mode === "delivery");
+  var a = $("#addrL");
+  if (a) {
+    a.style.display = d ? "grid" : "none";
+    $("#dNote").style.display = d ? "block" : "none";
+  }
+}
+
+// Управление количеством товаров в корзине
+$("#cartBody").onclick = function(e) {
+  var m = e.target.dataset.m, p = e.target.dataset.p;
+  if (m !== undefined) { cart[m]--; if (cart[m] <= 0) delete cart[m]; }
+  if (p !== undefined) cart[p]++;
+  if (m !== undefined || p !== undefined) {
+    save();
+    count();
+    var keep = snapshot();
+    renderCart();
+    restore(keep);
+  }
+  if (e.target.hasAttribute("data-close")) $("#cartDlg").close();
+};
+
+function snapshot() {
+  var f = $("#ordForm");
+  return f ? {n: f.n.value, p: f.p.value, a: f.a.value, t: f.t.value, c: f.c.value, m: f.m.value} : null;
+}
+function restore(s) {
+  var f = $("#ordForm");
+  if (s && f) { ["n", "p", "a", "t", "c", "m"].forEach(function(k) { f[k].value = s[k]; }); }
+}
+
+$("#cartBody").addEventListener("change", function(e) {
+  if (e.target.name === "mode") {
+    mode = e.target.value;
+    toggleAddr();
+  }
+});
+
+// Отправка заказа в Telegram
+$("#cartBody").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  var f = e.target;
+  var err = $("#ordErr");
+  var ph = f.p.value.replace(/[^\d+]/g, "");
+  
+  if (!f.n.value.trim()) { err.textContent = "Укажите имя"; return; }
+  if (ph.replace(/\D/g, "").length < 9) { err.textContent = "Проверьте номер телефона"; return; }
+  if (mode === "delivery" && !f.a.value.trim()) { err.textContent = "Укажите адрес доставки"; return; }
+  
+  var orderData = {
+    name: f.n.value.trim(),
+    phone: f.p.value.trim(),
+    address: mode === 'delivery' ? f.a.value.trim() : ({pickup: 'Самовывоз', hall: 'В зале'}[mode]),
+    items: Object.keys(cart).map(function(k) {
+      return { name: MENU[k][0], qty: cart[k], price: MENU[k][1] };
+    }),
+    total: sum(),
+    mode: mode,
+    time: f.t.value || 'Как можно скорее',
+    promo: f.c.value.trim(),
+    comment: f.m.value.trim()
+  };
+
+  var modeText = {delivery: '🚚 Доставка', pickup: '🏃 Самовывоз', hall: '🪑 В зале'}[mode];
+  var promoText = orderData.promo ? '\n🎁 <b>Промокод:</b> ' + orderData.promo : '';
+  var commentText = orderData.comment ? '\n💬 <b>Комментарий:</b> ' + orderData.comment : '';
+
+  var message = '🍕 <b>Новый заказ (Марвел Кафе)!</b>\n' +
+    '👤 <b>Имя:</b> ' + orderData.name + '\n' +
+    '📞 <b>Телефон:</b> ' + orderData.phone + '\n' +
+    '📍 <b>Получение:</b> ' + modeText + (mode === 'delivery' ? ' — ' + orderData.address : '') + '\n' +
+    '⏰ <b>Время:</b> ' + orderData.time + promoText + commentText + '\n\n' +
+    '🛒 <b>Корзина:</b>\n' +
+    orderData.items.map(function(item) { return '• ' + item.name + ' × ' + item.qty + ' — ' + (item.price * item.qty) + ' руб.'; }).join('\n') + '\n\n' +
+    '💰 <b>Итого: ' + orderData.total + ' руб.</b>';
+
+  try {
+    var response = await fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message.trim(),
+        parse_mode: 'HTML'
+      })
+    });
+
+    if (response.ok) {
+      alert('Заказ успешно отправлен! Мы скоро вам позвоним для подтверждения.');
+      cart = {};
+      save();
+      count();
+      $("#cartDlg").close();
+    } else {
+      var errData = await response.json();
+      console.error('Telegram API error:', errData);
+      err.textContent = 'Не удалось отправить заказ. Попробуйте еще раз.';
+    }
+  } catch (error) {
+    console.error('Network error:', error);
+    err.textContent = 'Нет соединения с сервером.';
+  }
+});
+
+function openCart() { renderCart(); $("#cartDlg").showModal(); }
+$("#openCart").onclick = openCart;
+$("#openCart2").onclick = openCart;
+
+document.querySelectorAll("[data-close]").forEach(function(x) {
+  x.onclick = function() { x.closest("dialog").close(); };
+});
+
+// Отправка брони стола в Telegram
+var bd = $("#bookForm");
+bd.d.min = new Date().toISOString().slice(0, 10);
+
+bd.onsubmit = async function(e) {
+  e.preventDefault();
+  var er = $("#bookErr");
+  if (!bd.n.value.trim() || !bd.d.value || !bd.t.value) {
+    er.textContent = "Заполните имя, дату и время";
+    return;
+  }
+  if (bd.p.value.replace(/\D/g, "").length < 9) {
+    er.textContent = "Проверьте номер телефона";
+    return;
+  }
+  er.textContent = "";
+
+  var message = '🪑 <b>Новая бронь стола!</b>\n' +
+    '👤 <b>Имя:</b> ' + bd.n.value.trim() + '\n' +
+    '📞 <b>Телефон:</b> ' + bd.p.value.trim() + '\n' +
+    '📅 <b>Дата и время:</b> ' + bd.d.value + ' в ' + bd.t.value + '\n' +
+    '👥 <b>Гостей:</b> ' + bd.g.value + '\n' +
+    '🎉 <b>Повод:</b> ' + bd.o.value;
+
+  try {
+    var res = await fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: CHAT_ID, text: message.trim(), parse_mode: 'HTML' })
+    });
+    if (res.ok) {
+      alert('Заявка на бронь отправлена! Мы скоро свяжемся с вами для подтверждения.');
+      bd.reset();
+    } else {
+      er.textContent = 'Ошибка при отправке. Попробуйте позже или позвоните нам.';
+    }
+  } catch (err) {
+    er.textContent = 'Нет соединения с сервером.';
+  }
+};
+</script>
+</body>
+</html>
